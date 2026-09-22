@@ -43,7 +43,8 @@ Example:
 ### Fast set
 
 [`data/verticalrtk_fast.jsonl`](data/verticalrtk_fast.jsonl) has 155
-rows, re-sourced in August 2026. It adds two things the first set does not carry:
+rows, last re-sourced on 21 September 2026. It adds two things the first set
+does not carry:
 a `vertical` label, so coverage can be scored per domain rather than only in
 aggregate, and a per-row `as_of`, so a reader can tell a stable reporting period
 from a value captured at an instant:
@@ -80,12 +81,13 @@ This repository ships **data only** — no runner, no graders, and no results.
 
 ## Point-in-time caveat
 
-The multi-step answers are correct as of **July 2026**, and the fast-set
-answers as of **August 2026**. Many questions have a ground truth that changes
-over time — crypto and commodity prices, FX rates, sports standings, and
-prediction markets.
+The multi-step answers are correct as of **July 2026**. The fast set was
+written in August 2026 and its moving rows were last re-sourced on **21
+September 2026**; every row's own `as_of` is the authority, not this paragraph.
+Many questions have a ground truth that changes over time — crypto and commodity
+prices, FX rates, sports standings, and prediction markets.
 
-The fast set states this per row in `as_of`, which carries three different
+The fast set states this per row in `as_of`, which carries four different
 kinds of validity. Treating them alike produces false failures:
 
 - **A reporting period** (`FY2025`, `2026-Q2`, `2026-07`). The answer does not
@@ -96,10 +98,23 @@ kinds of validity. Treating them alike produces false failures:
   2026-08-24T21:15Z)`). The answer was true at that instant and drifts within
   hours. Re-source these from the venue named in the answer immediately before
   you run, or exclude them.
+- **A forecast** (`2026-09-21T21:13Z (forecast for 2026-09-22)`). These cannot be
+  re-sourced at all: once the target date passes, the forecast it quoted is not
+  published anywhere. They are **re-based** instead — the target date moves, so
+  the query text changes along with the answer. Re-base them before a run or drop
+  them; grading a past forecast date measures nothing.
 
-The last group is small but it is where naive scoring goes wrong. USD/NOK moved
+Two groups are small but they are where naive scoring goes wrong. USD/NOK moved
 from 9.25 to 9.35 across a single afternoon of runs, so an answer graded against
 a stale capture fails while being correct.
+
+A fifth failure mode has no `as_of` to warn you: **a source that revises a period
+it already published**. The University of Michigan restated its August 2026
+sentiment index from 51.0 to 51.7 after the fact, and Eurostat revised Ireland's
+June 2026 unemployment rate from 5.0% to 4.9%. Both rows named a settled period
+and both went stale anyway. Re-check rows that cite a revisable statistic —
+sentiment, employment, national accounts, rig counts — even when their period
+looks closed.
 
 Where an answer is genuinely a range rather than a point — a share of traffic
 that different providers measure differently, a forecast, an obligation figure
