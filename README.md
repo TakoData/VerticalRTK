@@ -18,10 +18,9 @@ climatology, crypto, sports, prices and rates, and polling. The set also include
 a group of deliberately hard, multi-step questions.
 
 The benchmark tests whether a system retrieves the latest information, so we
-update the questions and reference answers periodically. When a value changes,
-we re-source its reference answer; when a question no longer has a current
-answer, we revise or replace it. Score a system against the current version of
-the data, and record which version you used when you report results.
+update the questions and reference answers periodically. See
+[Point-in-time caveat](#point-in-time-caveat) for how each row's validity is
+dated and what to re-check before a run.
 
 ## Data
 
