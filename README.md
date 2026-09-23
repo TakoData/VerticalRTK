@@ -61,6 +61,7 @@ from a value captured at an instant:
 | `vertical` | One of `companies`, `government_defense`, `macro_markets`, `society_health`, `energy_climate`, `sports`, `digital_usage`. |
 | `answer` | A reference answer that gives the correct result. |
 | `as_of` | When the reference answer was true, and for fast-moving rows when it was captured. |
+| `golden_source` | Present where the value's provenance is worth stating. `usaspending` on the five federal contract rows sourced from that API. |
 
 Rows per vertical: companies 61, government_defense 24, macro_markets 23,
 society_health 21, energy_climate 15, sports 8, digital_usage 3. The distribution
@@ -120,6 +121,59 @@ June 2026 unemployment rate from 5.0% to 4.9%. Both rows named a settled period
 and both went stale anyway. Re-check rows that cite a revisable statistic —
 sentiment, employment, national accounts, rig counts — even when their period
 looks closed.
+
+The federal contract rows state their basis, because two readings of the same
+question give different numbers.
+
+**Counts.** "Base federal contract" has no single meaning, on two axes. For
+Veterans Affairs in FY2025, counting only definitive contracts gives 4,507 and
+counting all four contract types gives 53,340; counting contracts first awarded
+in the year gives 23,703 where counting contracts still transacting in the year
+gives 37,519. The three count questions fix both axes: they ask for contracts
+active in the year and name the award types in a short qualifier, definitive
+contracts and purchase orders only. The award type letters repay attention,
+since A is a BPA call, B a purchase order, C a delivery order and D a definitive
+contract.
+
+Active means an award with at least one contract transaction dated in the fiscal
+year, including awards first issued earlier. That reading needs transaction-level
+data: USAspending's award-count endpoint, filtered on action date, returns 26,267
+for Veterans Affairs, only 2,558 above its own new-award count, so it is counting
+awards near their base action rather than every award still transacting. Counting
+the transactions directly gives 23,703 awards first issued in FY2025 plus 4,669
+from FY2024, 3,462 from FY2023 and a decaying tail before that. Each reference
+answer states the rule and gives the two competing readings, so a grader can tell
+them apart.
+
+**Outlays.** The figure comes from File C, the Account Breakdown by Award, which
+carries gross outlays from the start of the fiscal year through each submission
+period; period 12 gives the year. The award search is a different measure: its
+outlay field is lifetime-to-date, so a 2017 award reports against an FY2025
+filter, and no agency endpoint breaks outlays down by award category. NASA's
+FY2025 contract outlays are $20.0 billion, Energy's are $48.7 billion and
+Homeland Security's are at least $20.4 billion. Each sits where an agency of
+that shape should: 75% of agency-wide outlays for NASA, 71% for Energy, and 13%
+for Homeland Security, which spends mostly on grants and disaster relief.
+
+Contract outlays are not agency outlays, and the second is the number a search
+lands on. USAspending's agency page headlines what an agency paid out in total --
+$26.82 billion for NASA in FY2025 -- and that figure is correct for a question
+nobody asked here. File B, the object-class breakdown, shows where the difference
+goes: of NASA's $26.82 billion, the contract-type classes (services, supplies,
+equipment, land) come to $19.90 billion, and the rest is payroll, benefits and
+grants. That $19.90 billion is also the check on the File C figure, since the two
+come from different files on different dimensions and land 0.7% apart. Each
+reference answer names the agency-wide number so a grader can tell the two apart.
+
+Which agency a row names matters, because File C is only as complete as the
+agency's own award-to-account reporting. Sum File C's obligations for the agency
+and compare them against the same year's total in the award search before using
+a figure. Energy reconciles at 100% and NASA at 99.9%, so their answers are
+direct reads. Homeland Security reaches 85%, so its answer states a floor and
+accepts a band up to $25 billion. Defense reaches 3%, which is why the third
+outlay row names Energy: Defense reports its spending in full, but tracing a
+payment back to the contract that incurred it is the one thing it cannot do at
+scale, and that join is what File C is.
 
 Where an answer is genuinely a range rather than a point — a share of traffic
 that different providers measure differently, a forecast, an obligation figure
