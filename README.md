@@ -17,6 +17,11 @@ operations (bookings, billings, subscribers, sales volume, web traffic),
 climatology, crypto, sports, prices and rates, and polling. The set also includes
 a group of deliberately hard, multi-step questions.
 
+The benchmark tests whether a system retrieves the latest information, so we
+update the questions and reference answers periodically. See
+[Point-in-time caveat](#point-in-time-caveat) for how each row's validity is
+dated and what to re-check before a run.
+
 ## Data
 
 Two sets ship here. The second is a revised and expanded version of the first
