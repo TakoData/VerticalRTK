@@ -7,40 +7,29 @@ the reference.
 
 ## Why these benchmarks
 
-Most benchmarks for search APIs score retrieval: whether the system finds a page
-that contains the answer. That measures an index and a retriever. It doesn't
-measure what a person or an agent gets back from the system, which is an answer.
+Existing benchmarks for search APIs ask questions whose answer is easy to
+retrieve from the web: one page states it, and a system scores by finding that
+page. The questions that analysts ask often have no such page:
 
-The gap is widest for the questions that analysts ask. Many of those questions
-have one of these properties:
+- The open web documents the answer poorly, such as a company's segment revenue
+  or a federal agency's contract count.
+- The answer moves, such as a price, an FX rate, or a sports standing.
+- No single page states the answer, so a system must combine several sourced
+  figures.
 
-- The open web documents the answer poorly, if at all. Examples are a company's
-  segment revenue, a federal agency's contract count, and a city's climate
-  normals.
-- The ground truth moves. Examples are commodity and crypto prices, FX rates,
-  sports standings, and prediction markets.
-- No single page states the answer, so a system must combine and compute over
-  several sourced figures.
-
-A benchmark for these questions has to grade the answer, not the page. It also
-has to date its ground truth. A reference answer that was true last week can
-fail a system that's correct today. Each dataset here states when its answers
-were true and what to re-check before a run.
-
-Tako builds these benchmarks, and Tako's own API is one of the systems they
-evaluate. We publish the questions, the reference answers, and how each answer
-was sourced, so that anyone can reproduce a result or dispute one. If you find a
-wrong reference answer, [open an issue](https://github.com/TakoData/VerticalRTK/issues).
+VerticalRTK asks these questions. Many of their answers change over time, so
+each dataset states when its answers were true and what to re-check before a
+run.
 
 ## Datasets
 
 Each dataset has its own folder. The dataset's README describes its format, how
 to score it, and what to re-check before a run.
 
-| Dataset | Rows | What it tests | Ground truth dated |
+| Dataset | Rows | What it tests | Ground truth last refresh |
 | --- | --- | --- | --- |
 | [Research](datasets/research/) | 131 | Analyst research questions, including multi-step questions that combine and compute over sourced data. | July 2026 |
-| [Fast](datasets/fast/) | 155 | Questions across seven verticals, each with a reference answer that states when it was true. | Per row; moving rows re-sourced September 21, 2026 |
+| [Fast](datasets/fast/) | 155 | Questions across seven verticals, each with a reference answer that states when it was true. | September 22, 2026 |
 
 The research and fast sets share 27 questions. Score each set separately, and
 don't pool their results.
@@ -58,6 +47,13 @@ https://raw.githubusercontent.com/TakoData/VerticalRTK/<commit-sha>/datasets/fas
 Report the commit SHA with your results. Commits before the per-dataset folders
 keep both files in `data/`: `data/verticalrtk.jsonl` and
 `data/verticalrtk_fast.jsonl`.
+
+## Report a wrong answer
+
+Tako builds these benchmarks, and Tako's own API is one of the systems they
+evaluate. We publish the questions, the reference answers, and how each answer
+was sourced, so that anyone can reproduce a result or dispute one. If you find a
+wrong reference answer, [open an issue](https://github.com/TakoData/VerticalRTK/issues).
 
 ## License
 
