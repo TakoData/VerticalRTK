@@ -5,6 +5,9 @@ systems. Each benchmark is a set of questions with reference answers. You send
 each question to the system under test, then grade the system's answer against
 the reference.
 
+For how search and answer APIs scored on VerticalRTK, and the method behind the
+benchmark, see the [VerticalRTK benchmark page](https://tako.com/benchmarks/verticalrtk/).
+
 ## Why these benchmarks
 
 Existing benchmarks for search APIs ask questions whose answer is easy to
