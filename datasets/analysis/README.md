@@ -36,20 +36,6 @@ Each field has these keys:
 | `tolerance` | For a `float`, the allowed error: `abs`, `rel`, or both. `null` for every other type. |
 | `description` | What the value means and the form it takes, such as the unit or the precision. |
 
-Rows per vertical:
-
-| `vertical` | Rows |
-| --- | --: |
-| `economy` | 12 |
-| `companies` | 7 |
-| `federal_contracts` | 7 |
-| `crime` | 6 |
-| `housing` | 4 |
-| `trade` | 2 |
-| `public_finance` | 2 |
-| `labor` | 1 |
-| `transportation` | 1 |
-
 33 questions ask for two values, 6 ask for three, and 3 ask for four, for 96
 values in all.
 
@@ -76,22 +62,6 @@ Send the system the `query`, together with each field's `name`, `type`, and
 A missing field, or a value of the wrong type, is incorrect. Score a question
 as correct only when every one of its fields is correct. This folder ships
 **data only**: no runner, no graders, and no results.
-
-## How the questions were built
-
-Each question comes from a template that names a computation over one or two
-source series, such as "the current run of months in which one country's
-inflation is below another's". A generator filled each template from the
-`source`, computed the reference values, and kept a question only when it passed
-these checks:
-
-- **Web check:** a search found no page that states the answer. For one
-  question, `bis-cpi-below-streak` for France and Italy, a single page lists
-  the monthly rows, but none states the run.
-- **Near-ties:** the answer doesn't turn on a margin that a revision could flip.
-- **Filings:** for the five questions on US companies' income statements, the
-  reference values match a rebuild from SEC XBRL filings, both as first filed
-  and as last restated.
 
 ## Answer validity
 
