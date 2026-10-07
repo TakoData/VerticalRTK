@@ -89,8 +89,9 @@ these checks:
   question, `bis-cpi-below-streak` for France and Italy, a single page lists
   the monthly rows, but none states the run.
 - **Near-ties:** the answer doesn't turn on a margin that a revision could flip.
-- **Filings:** for the US companies, the reference values match a rebuild from
-  SEC XBRL filings, both as first filed and as last restated.
+- **Filings:** for the five questions on US companies' income statements, the
+  reference values match a rebuild from SEC XBRL filings, both as first filed
+  and as last restated.
 
 ## Answer validity
 
