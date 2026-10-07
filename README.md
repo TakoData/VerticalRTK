@@ -31,6 +31,7 @@ to score it, and what to re-check before a run.
 | [Research](datasets/research/) | 131 | Analyst research questions, including multi-step questions that combine and compute over sourced data. | July 2026 |
 | [Fast](datasets/fast/) | 155 | Questions across seven verticals, each with a reference answer that states when it was true. | September 22, 2026 |
 | [Connectors](datasets/connectors/) | 80 | Coverage of data connectors: figures that sit in licensed compilations and public data sources, across companies, macro, government spending, and sports. | September 29, 2026 |
+| [Analysis](datasets/analysis/) | 42 | Multi-step analysis: each answer needs a sourced series and a computation over it, such as a streak, a ranking, or a ratio. | October 6, 2026 |
 
 The research and fast sets share 27 questions. Score each set separately, and
 don't pool their results.
